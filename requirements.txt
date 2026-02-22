@@ -1,0 +1,6 @@
+# LangChain & LangGraph (core)
+langchain>=1.2.10
+langgraph>=1.0.9
+
+# Environment
+python-dotenv>=1.0.0
