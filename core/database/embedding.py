@@ -6,10 +6,13 @@ Reader is handled by appropriate classes that will be used with this class.
 
 import google.generativeai as genai
 from config import GEMIMINI_API_KEY
+import os
+from dotenv import load_dotenv
 
 # Use reader to get all the info into the needed format
-
-genai.configure(api_key=GEMIMINI_API_KEY)
+load_dotenv()
+gemini_key = os.getenv("GOOGLE_API_KEY")
+genai.configure(api_key=gemini_key)
 
 # Embedding the content
 result = genai.embed_content(
