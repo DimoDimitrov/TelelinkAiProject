@@ -70,7 +70,10 @@ class ChromaOperator:
         Get an existing collection and cache it on `self`.
         """
         self._collection = self.client.get_collection(name=self.collection_name)
-        return self._collection
+        if self._collection:
+            return self._collection
+        else:
+            return null
 
     def get_or_create_collection(self) -> chromadb.Collection:
         """

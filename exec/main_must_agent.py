@@ -1,13 +1,7 @@
-"""
-The interaction with the 'Must' requirements agent can be done here.
-
-"""
-
 import os
 from dotenv import load_dotenv
 from google import genai
 from langsmith import wrappers
-# from google.colab import userdata
 
 
 def main():
@@ -28,13 +22,30 @@ def main():
         },
     )
 
-    # Make a traced Gemini call
     response = client.models.generate_content(
-        model="gemini-3-flash-preview", 
-        contents="Explain how AI works in a few words"
+        model="gemini-2.0-flash",
+        contents="Explain how AI works in a few words",
     )
+    print("Generation:", response.text)
 
-    print(response.text)
+
+# prompt builder
+# from core.prompts.prompt_builder import make_must_agent_prompt
+
+# state = "...conversation history here..."
+# question = "User's current question"
+
+# prompt = make_must_agent_prompt(state, question)
+
+# response = client.models.generate_content(
+#     model="gemini-2.0-flash",
+#     contents=prompt,
+# )
+
+# state
+
+
+# rag
 
 
 if __name__ == "__main__":
