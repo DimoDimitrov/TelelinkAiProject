@@ -1,8 +1,18 @@
-import os
+import os, sys
 from dotenv import load_dotenv
 from google import genai
 from langsmith import wrappers
 
+from agents.must.must_agent import MustAgent, MustAgentConfig
+from core.database.vectorstore.prop_vectorization import (
+    CHROMA_LOCATION,
+    CHROMA_COLLECTION_NAME,
+)
+from core.database.vectorstore.prop_retriever import PropertyRetriever
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
 def main():
     load_dotenv()
@@ -22,31 +32,34 @@ def main():
         },
     )
 
-    response = client.models.generate_content(
-        model="gemini-2.0-flash",
-        contents="Explain how AI works in a few words",
+    retriever = PropertyRetriever(
+        location=CHROMA_LOCATION,
+        collection_name=CHROMA_COLLECTION_NAME,
     )
-    print("Generation:", response.text)
 
+    agent = MustAgent(
+        client,
+        retriever=retriever,
+        config=MustAgentConfig(
+            model="gemini-2.5-flash",
+            max_state_messages=6,
+            use_rag=True,
+            rag_top_k=3,
+        ),
+    )
 
-# prompt builder
-# from core.prompts.prompt_builder import make_must_agent_prompt
-
-# state = "...conversation history here..."
-# question = "User's current question"
-
-# prompt = make_must_agent_prompt(state, question)
-
-# response = client.models.generate_content(
-#     model="gemini-2.0-flash",
-#     contents=prompt,
-# )
-
-# state
-
-
-# rag
+    print("Agent ready. Enter a question (empty to exit).")
+    while True:
+        question = input("User > ").strip()
+        if not question:
+            break
+        answer = agent.ask(question)
+        print("Agent > " + answer)
+        print()
 
 
 if __name__ == "__main__":
     main()
+
+# TO RUN: 
+# python -m exec.main_must_agent
