@@ -37,7 +37,7 @@ class Embedder:
                 model=self.model,
                 contents=clean_texts,
             )
-            print(f"[Embedder] Done. {len(result.embeddings)} vectors generated.")
+            # print(f"[Embedder] Done. {len(result.embeddings)} vectors generated.")
             return [getattr(emb, "values", emb) for emb in result.embeddings]
 
         except genai_errors.ClientError as e:

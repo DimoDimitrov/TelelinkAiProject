@@ -26,3 +26,13 @@ MUST_AGENT_PROMPT = """
     Avoid making up information and don't halucinate. If you don't know anything, ask for more information.
     Keep your answers close to your role. Do not answer questions that have nothing to do with your role.
 """
+
+ORCHESTRATOR_AGENT_PROMPT="""
+
+"""
+
+BUYER_AHENT1_PROMPT="""
+"""
+
+BUYER_AHENT2_PROMPT="""
+"""
