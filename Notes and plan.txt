@@ -1,0 +1,17 @@
+- For the complex system, STATE will be mandatory.
+- Check how to make the system communicate, use tools and function as an auction.
+- Make nodes
+- Make capabilities
+- Test with all the docs
+- Make STATE for context and info that needs to get saved
+- Test 
+
+- Reuse the structure for the buying agents. 
+
+- Make a functionality for JSON config implementation
+
+
+To Keep in mind after finishing:
+- Make a Docker immage
+- Deploy to DockerHub
+- Send the link with the .env

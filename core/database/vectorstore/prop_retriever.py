@@ -38,7 +38,6 @@ class PropertyRetriever:
         embedder: Optional[Embedder] = None,
         chroma: Optional[ChromaOperator] = None,
     ) -> None:
-        # Use the same embedding model you used when indexing properties
         self.embedder = embedder or Embedder("gemini-embedding-001")
         self.chroma = chroma or ChromaOperator(location=location, collection_name=collection_name)
 

@@ -55,7 +55,6 @@ class MustAgent:
             max_messages=self.config.max_state_messages
         )
 
-        # Optional RAG: retrieve relevant properties from Chroma
         if self.retriever and self.config.use_rag:
             retrieved: List[RetrievedProperty] = self.retriever.retrieve(
                 query=question,
@@ -81,7 +80,6 @@ class MustAgent:
 
         answer = getattr(response, "text", None) or str(response)
 
-        # Update conversation memory
         self.state.add_message("user", question)
         self.state.add_message("assistant", answer)
 
